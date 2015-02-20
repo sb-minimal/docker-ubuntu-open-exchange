@@ -1,0 +1,34 @@
+#!/bin/bash
+
+cat << EOF >> /etc/apt/sources.list.d/open-xchange.list
+
+deb http://software.open-xchange.com/products/appsuite/stable/appsuiteui/DebianWheezy/ /
+deb http://software.open-xchange.com/products/appsuite/stable/backend/DebianWheezy/ /
+
+# if you have a valid maintenance subscription, please uncomment the 
+# following and add the ldb account data to the url so that the most recent
+# packages get installed
+# deb http://LDBACCOUNT:LDBPASSWORD@software.open-xchange.com/products/appsuite/stable/appsuiteui/updates/DebianWheezy /
+# deb http://LDBACCOUNT:LDBPASSWORD@software.open-xchange.com/products/appsuite/stable/backend/updates/DebianWheezy /
+EOF
+
+mkdir -p /data/mysql
+ln -s /data/mysql /var/lib/mysql
+
+apt-get update -y
+
+apt-get install -y --force-yes open-xchange open-xchange-authentication-database open-xchange-grizzly open-xchange-admin open-xchange-appsuite open-xchange-appsuite-backend open-xchange-appsuite-manifest paxctl netcat mysql-server
+
+apt-get -y upgrade
+
+echo PATH=$PATH:/opt/open-xchange/sbin/ >> ~/.bashrc && . ~/.bashrc
+
+paxctl -Cm /usr/bin/java
+
+chmod +x /ox.sh
+
+a2enmod proxy proxy_http proxy_balancer expires deflate headers rewrite mime setenvif lbmethod_byrequests
+a2enconf proxy_http
+
+mv /etc/apache2/sites-available/000-default.new.conf /etc/apache2/sites-available/000-default.conf
+
