@@ -12,12 +12,24 @@ deb http://software.open-xchange.com/products/appsuite/stable/backend/DebianWhee
 # deb http://LDBACCOUNT:LDBPASSWORD@software.open-xchange.com/products/appsuite/stable/backend/updates/DebianWheezy /
 EOF
 
-mkdir -p /data/mysql
-ln -s /data/mysql /var/lib/mysql
+#mkdir -p /data/mysql
+#ln -s /data/mysql /var/lib/mysql
 
 apt-get update -y
 
-apt-get install -y --force-yes open-xchange open-xchange-authentication-database open-xchange-grizzly open-xchange-admin open-xchange-appsuite open-xchange-appsuite-backend open-xchange-appsuite-manifest paxctl netcat mysql-server
+# maybe add open-xchange-authentication-imap?
+apt-get install -y --force-yes open-xchange open-xchange-authentication-database \
+  open-xchange-grizzly open-xchange-admin open-xchange-appsuite open-xchange-appsuite-backend open-xchange-appsuite-manifest \
+  open-xchange-appsuite-l10n-de-de \
+  open-xchange-caldav open-xchange-carddav open-xchange-webdav-directory \
+  open-xchange-drive open-xchange-drive-comet \
+  open-xchange-eas-provisioning-mail \
+  open-xchange-freebusy \
+  open-xchange-mailfilter open-xchange-messaging  \
+  open-xchange-mobile-config \
+  open-xchange-passwordchange-database open-xchange-passwordchange-servlet \
+  open-xchange-push-imapidle open-xchange-push-mailnotify \
+  paxctl netcat mysql-server
 
 apt-get -y upgrade
 

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+source /data/etc/script_settings
+
+exec /opt/open-xchange/sbin/createcontext -A oxadminmaster -P $ADMIN_MASTER_PASSWORD "$@"
