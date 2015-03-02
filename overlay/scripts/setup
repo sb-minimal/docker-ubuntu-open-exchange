@@ -10,7 +10,6 @@ deb http://software.open-xchange.com/products/appsuite/stable/office-web/DebianW
 deb http://software.open-xchange.com/products/appsuite/stable/documentconverter-api/DebianWheezy /
 deb http://software.open-xchange.com/products/appsuite/stable/calcengine/DebianWheezy/ /
 
-
 # if you have a valid maintenance subscription, please uncomment the 
 # following and add the ldb account data to the url so that the most recent
 # packages get installed
@@ -26,7 +25,6 @@ EOF
 apt-get update -y --force-yes
 apt-get upgrade -y --force-yes
 
-# maybe add open-xchange-authentication-imap?
 apt-get install -y --force-yes open-xchange open-xchange-authentication-database \
   open-xchange-grizzly open-xchange-admin open-xchange-appsuite open-xchange-appsuite-backend open-xchange-appsuite-manifest \
   open-xchange-appsuite-l10n-de-de \
