@@ -5,17 +5,26 @@ cat << EOF >> /etc/apt/sources.list.d/open-xchange.list
 deb http://software.open-xchange.com/products/appsuite/stable/appsuiteui/DebianWheezy/ /
 deb http://software.open-xchange.com/products/appsuite/stable/backend/DebianWheezy/ /
 
+deb http://software.open-xchange.com/products/appsuite/stable/office/DebianWheezy /
+deb http://software.open-xchange.com/products/appsuite/stable/office-web/DebianWheezy /
+deb http://software.open-xchange.com/products/appsuite/stable/documentconverter-api/DebianWheezy /
+deb http://software.open-xchange.com/products/appsuite/stable/calcengine/DebianWheezy/ /
+
+
 # if you have a valid maintenance subscription, please uncomment the 
 # following and add the ldb account data to the url so that the most recent
 # packages get installed
 # deb http://LDBACCOUNT:LDBPASSWORD@software.open-xchange.com/products/appsuite/stable/appsuiteui/updates/DebianWheezy /
 # deb http://LDBACCOUNT:LDBPASSWORD@software.open-xchange.com/products/appsuite/stable/backend/updates/DebianWheezy /
+# deb https://LDBACCOUNT:LDBPASSWORD@software.open-xchange.com/products/appsuite/stable/documentconverter-api/updates/DebianWheezy/ /
+
 EOF
 
 #mkdir -p /data/mysql
 #ln -s /data/mysql /var/lib/mysql
 
-apt-get update -y
+apt-get update -y --force-yes
+apt-get upgrade -y --force-yes
 
 # maybe add open-xchange-authentication-imap?
 apt-get install -y --force-yes open-xchange open-xchange-authentication-database \
@@ -29,9 +38,11 @@ apt-get install -y --force-yes open-xchange open-xchange-authentication-database
   open-xchange-mobile-config \
   open-xchange-passwordchange-database open-xchange-passwordchange-servlet \
   open-xchange-push-imapidle open-xchange-push-mailnotify \
+  open-xchange-documentconverter-api open-xchange-documents-backend open-xchange-documents-ui open-xchange-documents-ui-static \
+  hunspell hunspell-de-de hunspell-en-us \
   paxctl netcat mysql-server
 
-apt-get -y upgrade
+apt-get upgrade -y --force-yes
 
 echo PATH=$PATH:/opt/open-xchange/sbin/ >> ~/.bashrc && . ~/.bashrc
 
@@ -43,4 +54,5 @@ a2enmod proxy proxy_http proxy_balancer expires deflate headers rewrite mime set
 a2enconf proxy_http
 
 mv /etc/apache2/sites-available/000-default.new.conf /etc/apache2/sites-available/000-default.conf
+mv /scripts/ox-etc/* /opt/open-xchange/etc/
 
