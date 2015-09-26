@@ -36,7 +36,7 @@ apt-get install -y --force-yes open-xchange open-xchange-authentication-database
   open-xchange-mobile-config \
   open-xchange-passwordchange-database open-xchange-passwordchange-servlet \
   open-xchange-push-imapidle open-xchange-push-mailnotify \
-  open-xchange-documentconverter-api open-xchange-documents-backend open-xchange-documents-ui open-xchange-documents-ui-static \
+  open-xchange-documentconverter-api calcengine open-xchange-documents-backend open-xchange-documents-ui open-xchange-documents-ui-static \
   hunspell hunspell-de-de hunspell-en-us \
   paxctl netcat mysql-server
 
